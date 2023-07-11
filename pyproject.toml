@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "job-parcer"
+version = "0.1.0"
+description = ""
+authors = ["Sheen <dan.80956@gmail.com>"]
+readme = "README.md"
+packages = [{include = "job_parcer"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
