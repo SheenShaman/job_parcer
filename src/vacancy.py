@@ -1,6 +1,7 @@
 
 class Vacancy:
-    def __init__(self, title, url, salary_from, salary_to, currency, employer, platform):
+    def __init__(self, id, title, url, salary_from, salary_to, currency, employer, platform):
+        self.id = id
         self.title = title
         self.url = url
         self.salary_from = salary_from
@@ -23,5 +24,4 @@ class Vacancy:
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self.title}, {self.url}, {self.salary},' \
-               f'{self.currency}, {self.employer}, {self.platform})'
-
+               f' {self.currency}, {self.employer}, {self.platform})'
