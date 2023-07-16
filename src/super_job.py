@@ -11,7 +11,6 @@ class SuperJob(API):
             'count': 10
         }
 
-
     def get_vacancies(self):
 
         url = "https://api.superjob.ru/2.0/vacancies/"
