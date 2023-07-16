@@ -13,13 +13,16 @@ class Vacancy:
     @property
     def salary(self) -> int:
         """ Считает среднюю зарплату """
-        salary = int((self.salary_from + self.salary_to) / 2)
+        if self.salary_from > 0:
+            salary = int((self.salary_from + self.salary_to) / 2)
+        else:
+            salary = self.salary_to
         return salary
 
     def __gt__(self, other) -> bool:
         return self.salary > other.salary
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
         return self.salary < other.salary
 
     def __repr__(self):

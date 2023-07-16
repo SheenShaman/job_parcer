@@ -9,6 +9,16 @@ class API(ABC):
         pass
 
     @abstractmethod
+    def get_requests(self):
+        """ Выполняет запрос по заданным параметрам """
+        pass
+
+    @abstractmethod
+    def parsing(self, data_list):
+        """ Разбивает данные на части """
+        pass
+
+    @abstractmethod
     def get_vacancies(self):
         """ Получает список вакансий"""
         pass
