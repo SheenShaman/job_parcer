@@ -1,4 +1,3 @@
-
 class Vacancy:
     def __init__(self, id, title, url, salary_from, salary_to, currency, employer, platform):
         self.id = id

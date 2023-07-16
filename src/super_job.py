@@ -49,8 +49,3 @@ class SuperJob(API):
             pass
         else:
             return self.parsing(vac_list)
-
-
-super_job_api = SuperJob('Python')
-super_vacancies = super_job_api.get_vacancies()
-print(super_vacancies)

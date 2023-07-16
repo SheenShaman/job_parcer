@@ -59,8 +59,3 @@ class HeadHunter(API):
             pass
         else:
             return self.parsing(vac_list)
-
-
-hh_api = HeadHunter('Python')
-hh_vacancies = hh_api.get_vacancies()
-print(hh_vacancies)
