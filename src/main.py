@@ -1,6 +1,7 @@
 from head_hunter import HeadHunter
 from super_job import SuperJob
 from save_to_json import JSONSaver
+from utils import sort_top, sort_data
 
 
 def main():
@@ -34,10 +35,34 @@ def main():
         print('Нет такого источника, по умолчанию значение "all"')
 
     while True:
-        pass
+        command = input('Если вы хотите вывести последние вакансии по дате, введите команду "sort"\n'
+                        'Если вы хотите вывести топ вакансий по зарплате введите команду "top"\n')
+        if command == 'sort':
+            sorted_vacancy = sort_data(vacancies)
+            for vac in sorted_vacancy:
+                print(vac)
 
-    #for vac in vacancies:
-    #    print(vac)
+        elif command == 'top':
+            top_n = int(input('\nВведите сколько вакансий вы хотите: '))
+            sorted_vacancy = sort_top(vacancies, top_n)
+            for vac in sorted_vacancy:
+                print(vac)
+
+        action = input('\nЕсли вы хотите вытянуть определенную вакансию, введите каманду "pull"\n'
+                       'Если вы хотите удалить определенную вакансию, введите каманду "del"\n'
+                       'Если вы хотите удалить весь список вакансий, введите команду "clean"\n')
+
+        if action == 'pull':
+            pull_id = input('Введите id вакансии, которую хотите вывести:\n')
+            print(json_saver.pulling(pull_id))
+        elif action == 'del':
+            del_id = input('Введите id вакансии, которую хотите удалить:\n')
+            json_saver.deleting(del_id)
+        elif action == 'clean':
+            json_saver.clear_data()
+        else:
+            print("Такой команды нет")
+            continue
 
 
 if __name__ == '__main__':
