@@ -1,6 +1,6 @@
 import os
 import json
-from abstract import JSON
+from src.abstract import JSON
 
 
 class FileMixin:

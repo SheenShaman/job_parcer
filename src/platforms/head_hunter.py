@@ -1,7 +1,7 @@
 import requests
-from abstract import API
-from vacancy import Vacancy
-from data_error import DataError
+from src.abstract import API
+from src.platforms.vacancy import Vacancy
+from src.errors.data_error import DataError
 
 
 class HeadHunter(API):

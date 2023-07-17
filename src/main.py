@@ -1,7 +1,7 @@
-from head_hunter import HeadHunter
-from super_job import SuperJob
-from save_to_json import JSONSaver
-from utils import sort_top
+from src.platforms.head_hunter import HeadHunter
+from src.platforms.super_job import SuperJob
+from src.data.save_to_json import JSONSaver
+from src.utils import sort_top
 
 
 def main():

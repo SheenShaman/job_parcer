@@ -1,4 +1,4 @@
-from vacancy import Vacancy
+from src.platforms.vacancy import Vacancy
 
 
 def sort_top(all_vacancies: list[Vacancy], num: int) -> list[Vacancy]:
