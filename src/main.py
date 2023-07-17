@@ -1,13 +1,16 @@
 from head_hunter import HeadHunter
 from super_job import SuperJob
 from save_to_json import JSONSaver
-from utils import sort_top, sort_data
+from utils import sort_top
 
 
 def main():
+    # Получение поискового запроса
+    greeting = input('Привет!\nВведите, что вы хотите найти: ')
+
     # Создание экземпляров для работы с API
-    hh_api = HeadHunter("Python")
-    super_job_api = SuperJob("Python")
+    hh_api = HeadHunter(greeting)
+    super_job_api = SuperJob(greeting)
 
     # Получение вакансий с разных платформ
     hh_vac = hh_api.get_vacancies()
@@ -23,11 +26,11 @@ def main():
     for vac in all_vacancies:
         json_saver.writing_data(vac.__dict__)
 
-    source = input('С какой платформы вы хотите получить вакансии(Введите "hh", "SJ" или "all")?\n')
+    source = input('С какой платформы вы хотите получить вакансии(Введите "HH", "SJ" или "all")?\n')
     vacancies = all_vacancies
     if source.lower() == 'hh':
         vacancies = hh_vac
-    elif source.lower() == 'SJ':
+    elif source.lower() == 'sj':
         vacancies = sj_vac
     elif source.lower() == 'all':
         vacancies = all_vacancies
@@ -35,22 +38,21 @@ def main():
         print('Нет такого источника, по умолчанию значение "all"')
 
     while True:
-        command = input('Если вы хотите вывести последние вакансии по дате, введите команду "sort"\n'
-                        'Если вы хотите вывести топ вакансий по зарплате введите команду "top"\n')
-        if command == 'sort':
-            sorted_vacancy = sort_data(vacancies)
-            for vac in sorted_vacancy:
-                print(vac)
+        command = input('Если вы хотите вывести топ вакансий по зарплате введите команду "top"\n'
+                        'Если вы хотите завершить программу введите команду "stop"\n')
 
-        elif command == 'top':
+        if command == 'top':
             top_n = int(input('\nВведите сколько вакансий вы хотите: '))
             sorted_vacancy = sort_top(vacancies, top_n)
             for vac in sorted_vacancy:
                 print(vac)
+        elif command == 'stop':
+            print('Всего доброго!')
+            break
 
         action = input('\nЕсли вы хотите вытянуть определенную вакансию, введите каманду "pull"\n'
                        'Если вы хотите удалить определенную вакансию, введите каманду "del"\n'
-                       'Если вы хотите удалить весь список вакансий, введите команду "clean"\n')
+                       'Если вы хотите завершить программу введите команду "stop"\n')
 
         if action == 'pull':
             pull_id = input('Введите id вакансии, которую хотите вывести:\n')
@@ -58,8 +60,9 @@ def main():
         elif action == 'del':
             del_id = input('Введите id вакансии, которую хотите удалить:\n')
             json_saver.deleting(del_id)
-        elif action == 'clean':
-            json_saver.clear_data()
+        elif action == 'stop':
+            print('Всего доброго!')
+            break
         else:
             print("Такой команды нет")
             continue

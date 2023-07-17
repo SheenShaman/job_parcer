@@ -12,8 +12,10 @@ class Vacancy:
     @property
     def salary(self) -> int:
         """ Считает среднюю зарплату """
-        if self.salary_from > 0:
+        if self.salary_from > 0 and self.salary_to > 0:
             salary = int((self.salary_from + self.salary_to) / 2)
+        elif self.salary_from > 0 and self.salary_to == 0:
+            salary = self.salary_from
         else:
             salary = self.salary_to
         return salary
@@ -27,3 +29,7 @@ class Vacancy:
     def __repr__(self):
         return f'{self.__class__.__name__}({self.title}, {self.url}, {self.salary},' \
                f' {self.currency}, {self.employer}, {self.platform})'
+
+    def __str__(self):
+        return f'id ({self.id})\n{self.title} -> {self.url}\n{self.salary} {self.currency}\n' \
+               f'{self.employer}\n{self.platform}\n'

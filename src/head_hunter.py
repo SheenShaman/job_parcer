@@ -7,15 +7,15 @@ from data_error import DataError
 class HeadHunter(API):
     def __init__(self, keyword):
         self.__params = {
-            'text': keyword,
+            'text': {keyword},
             'page': 0,
-            'per_page': 10
+            'per_page': 50
         }
 
     def get_requests(self):
         """ Выполняет запрос по заданным параметрам """
 
-        url = "https://api.hh.ru/vacancies"
+        url = "https://api.hh.ru/vacancies/"
         response = requests.get(url, params=self.__params)
         if response.status_code != 200:
             raise DataError
@@ -29,7 +29,7 @@ class HeadHunter(API):
             salary_from, salary_to, currency = self.get_salary(vac['salary'])
             vacancy = Vacancy(vac['id'],
                               vac['name'],
-                              vac['url'],
+                              vac['alternate_url'],
                               salary_from,
                               salary_to,
                               currency,

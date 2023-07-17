@@ -48,9 +48,6 @@ class JSONSaver(FileMixin, JSON):
 
         file_data = self.open_file(self.file_path)
 
-        if not id:
-            return file_data
-
         result = []
         for item in file_data:
             if id == item['id']:

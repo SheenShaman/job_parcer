@@ -10,7 +10,7 @@ class SuperJob(API):
             'keywords': keyword,
             'sort_new (unixtime)': 1,
             'page': 0,
-            'count': 10
+            'count': 50
         }
 
     def get_requests(self):
