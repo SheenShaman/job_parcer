@@ -5,14 +5,17 @@ from data_error import DataError
 
 
 class HeadHunter(API):
-    def __init__(self, keyword):
+    """
+    Класс для работы с API HeadHunter
+    """
+    def __init__(self, keyword: str) -> None:
         self.__params = {
             'text': {keyword},
             'page': 0,
             'per_page': 50
         }
 
-    def get_requests(self):
+    def get_requests(self) -> list:
         """ Выполняет запрос по заданным параметрам """
 
         url = "https://api.hh.ru/vacancies/"
@@ -21,7 +24,7 @@ class HeadHunter(API):
             raise DataError
         return response.json()['items']
 
-    def parsing(self, data_list):
+    def parsing(self, data_list: list) -> list:
         """ Разбивает данные на части """
 
         vacancies = []
@@ -39,7 +42,7 @@ class HeadHunter(API):
         return vacancies
 
     @staticmethod
-    def get_salary(salary):
+    def get_salary(salary: dict) -> list:
         """ Преобразует параметр salary в нужный формат """
 
         new_salary = [0, 0, None]
@@ -50,7 +53,7 @@ class HeadHunter(API):
             new_salary[0] = salary['to']
         return new_salary
 
-    def get_vacancies(self):
+    def get_vacancies(self) -> list:
         """ Получает список вакансий"""
 
         try:

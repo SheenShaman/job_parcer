@@ -1,3 +1,4 @@
+import os
 import requests
 from abstract import API
 from vacancy import Vacancy
@@ -5,7 +6,10 @@ from data_error import DataError
 
 
 class SuperJob(API):
-    def __init__(self, keyword):
+    """
+    Класс для работы с API SuperJob
+    """
+    def __init__(self, keyword: str) -> None:
         self.__params = {
             'keywords': keyword,
             'sort_new (unixtime)': 1,
@@ -13,18 +17,18 @@ class SuperJob(API):
             'count': 50
         }
 
-    def get_requests(self):
+    def get_requests(self) -> list:
         """ Выполняет запрос по заданным параметрам """
-
+        api_key: str = os.getenv('Super_Job_API_KEY')
         url = "https://api.superjob.ru/2.0/vacancies/"
-        headers = {'X-Api-App-Id': 'v3.r.137674552.b6a9d0979a68caf85738e74388622082e27eda22.fdbe2c04b60f10d39a60651a38c21a3dc66ec9f4'}
+        headers = {'X-Api-App-Id': api_key}
 
         response = requests.get(url, params=self.__params, headers=headers)
         if response.status_code != 200:
             raise DataError
         return response.json()['objects']
 
-    def parsing(self, data_list):
+    def parsing(self, data_list: list) -> list:
         """ Разбивает данные на части """
 
         vacancies = []
@@ -40,7 +44,7 @@ class SuperJob(API):
             vacancies.append(vacancy)
         return vacancies
 
-    def get_vacancies(self):
+    def get_vacancies(self) -> list:
         """ Получает список вакансий"""
 
         try:
